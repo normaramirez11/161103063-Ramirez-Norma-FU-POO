@@ -2,7 +2,7 @@ public class JuegoMain
 {
     public static void main(String args[])
     {
-        AK bronce = new AK();
+        AK bronce = new AK("bronce",5,65,5,1000,10,20);
         bronce.tipo = "Bronce";
         bronce.cargador = 5;
         bronce.precision = 65;

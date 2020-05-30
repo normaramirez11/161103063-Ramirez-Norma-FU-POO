@@ -10,7 +10,7 @@
  */
 public class MainAviso {
     public static void main(String[] args) {
-        Aviso aviso1 = new Aviso();
+        Aviso aviso1 = new Aviso(1,"","","","","","","","","");
         aviso1.id= 1;
         aviso1.titulo = "Insumos y bienes muebles de laboratorio disponibles";
         aviso1.nombre = "Eduardo Flores Díaz";
@@ -24,7 +24,7 @@ public class MainAviso {
         System.out.println(aviso1.toString());
         System.out.println("\n\n\n");
 
-        Aviso aviso2 = new Aviso();
+        Aviso aviso2 = new Aviso(2,"","","","","","","","","");
         aviso2.id = 2;
         aviso2.titulo = "CONFERENCIA DR. COSSARIZZA";
         aviso2.nombre = "Kevin  Gonzalez";
