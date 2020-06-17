@@ -21,10 +21,6 @@ public class AK
     
     public AK(){}  
     
-    public void disparar()
-    {
-        System.out.println("Te estoy disparando con un daño de: "); 
-    }
     public void apuntar()
     {
         

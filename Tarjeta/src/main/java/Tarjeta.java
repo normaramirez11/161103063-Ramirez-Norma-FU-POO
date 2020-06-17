@@ -5,12 +5,12 @@ public class Tarjeta
     String nombre;
     int dia, mes, año;
     int cv;
-    double monto;
-    double apartado;
+    double montoDisponible;
+    double montoApartado;
     
     public Tarjeta(){}
     
-    public Tarjeta(int nCuenta, int NIP, String nombre, int dia, int mes, int año, int cv, double monto, double apartado)
+    public Tarjeta(int nCuenta, int NIP, String nombre, int dia, int mes, int año, int cv, double montoDisponible, double montoApartado)
     {
         this.nCuenta = nCuenta;
         this.NIP = NIP;
@@ -19,8 +19,8 @@ public class Tarjeta
         this.mes = mes;
         this.año = año;
         this.cv = cv;
-        this.monto = monto;
-        this.apartado = apartado;
+        this.montoDisponible = montoDisponible;
+        this.montoApartado = montoApartado;
         
 }
     
@@ -28,7 +28,7 @@ public class Tarjeta
     {
         if(nCuenta == 123123 && NIP == 1133)
         {
-            return new Tarjeta(123123, 1133, "Eduardo Díaz Flores",31,12,2032, 543, 45987.22, 550);
+            return new Tarjeta(123123, 1133, "Eduardo Díaz Flores",31,12,2032, 542, 45987.22, 550);
         }
         else if(nCuenta == 456789 && NIP == 3367)
         {    
@@ -38,42 +38,54 @@ public class Tarjeta
             return new Tarjeta() ;
     }
     
-    public void Deposito(double monto)
+    public void Deposito(double deposito)
     {
-        this.monto += monto;
+        this.montoDisponible = this.montoDisponible + deposito;
     }
-    
-    public void Retiro(double monto){
-            if(monto <=this.monto && monto>=0){
-        
-        this.monto -= monto;
-        
-    }else{
-    
-    System.out.println("tu saldo es insuficiente");
-    }
-        
- }
-    
-    public void EliminarApartado(){
-        if(monto<=this.monto && monto >=0){
-        this.apartado -= apartado;
-        this.monto=apartado;
-        
+    public void verificarRetiro(double retiro){
+        if (retiro<=this.montoDisponible ){
+            retiro(retiro);
+            System.out.println("Retiro realizado\n");
+            
         }else{
-            System.out.println("la cantidad es mayor a tu apartado");
+            System.out.println("No hay saldo suficiente");
         }
+    }
+    
+    public void retiro(double retiro){
+        this.montoDisponible=this.montoDisponible - retiro;
+
+    }
+    
+    public void Apartado(){
+        this.montoDisponible=this.montoDisponible+this.montoApartado;
+        this.montoApartado=0;
+    }
+    
+    public void verificarApartado(double apartado){
+        if (apartado<=this.montoDisponible){
+            crearApartado(apartado);
+            System.out.println("Apartado realizado");
+            
+        }else{
+            System.out.println("No hay saldo suficiente");
+        }
+    }
+    
+    public void crearApartado(double apartado){
+        this.montoApartado=this.montoApartado+apartado;
+        this.montoDisponible=this.montoDisponible- this.montoApartado;
         
     }
     public double Total()
     {
-        return this.monto + this.apartado;
+        return this.montoDisponible + this.montoApartado;
     }
 
     @Override
     public String toString() {
-        return " nCuenta=" + nCuenta + "\n nombre= " + nombre + "\n Fecha de vencimiento" 
-                + dia + "/" + mes + "/" + año + "\n cv= " + cv + "\n monto=" + monto + "\n apartado= " + apartado + "\n Total=" 
+        return " nCuenta=" + nCuenta +"\n NIP="+NIP+ "\n nombre= " + nombre + "\n Fecha de vencimiento" 
+                + dia + "/" + mes + "/" + año + "\n cv= " + cv + "\n montoDisponible=" + this.montoDisponible + "\n montoApartado= " + montoApartado + "\n Total=" 
                 + this.Total();
     }
     

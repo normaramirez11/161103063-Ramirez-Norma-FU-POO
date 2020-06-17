@@ -15,7 +15,8 @@ public class MainTarjeta
     {    
         Tarjeta tarjeta;
         Scanner scan = new Scanner(System.in);
-        int nCuenta, NIP;
+        int nCuenta;
+        int NIP;
         int opcion;
         System.out.print("Número de cuenta: ");
         nCuenta = scan.nextInt();
@@ -28,7 +29,11 @@ public class MainTarjeta
             System.out.println("¿Qué operación desea realizar?");
             System.out.println("1.- Depósito");
             System.out.println("2.- Retiro");
+            if (tarjeta.montoApartado > 0){
             System.out.println("3.- Eliminar apartado");
+            }else{
+                System.out.println("3.-Crear apartado");
+            }
             System.out.println("4.- Imprimir los datos de su cuenta");
             System.out.println("5.- Salir");
             System.out.print("Opción: ");
@@ -38,18 +43,27 @@ public class MainTarjeta
             {
                 case 1:
                     System.out.print("Monto a depositar: ");
-                    tarjeta.Deposito(scan.nextDouble());
+                    double Deposito=scan.nextDouble();
+                    tarjeta.Deposito(Deposito);
                     break;
                     
                 case 2:
                     System.out.print("Monto a retirar: ");
-                    tarjeta.Retiro(scan.nextDouble());
+                    double Retiro=scan.nextDouble();
+                    tarjeta.verificarRetiro(Retiro);
                     break;
                     
                 case 3:
-                    tarjeta.EliminarApartado();
-                    System.out.println("Apartado eliminado");
+                    if(tarjeta.montoApartado !=0){
+                        tarjeta.Apartado();
+                        System.out.println("Apartado eliminado\n");
+                    }else{
+                        System.out.println("¿Cual sera la cantidad de apartado?\n");
+                        double apartado=scan.nextDouble();
+                        tarjeta.verificarApartado(apartado);
+                    }
                     break;
+                   
                 
                 case 4:
                     System.out.println(tarjeta.toString());
